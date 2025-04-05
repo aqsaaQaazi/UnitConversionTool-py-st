@@ -1,5 +1,4 @@
 import streamlit as st
-
 # -----------LOGIC-------------
 # UI: select category => select unit => enter number => get results
 
@@ -100,6 +99,11 @@ if st.button("Convert"):
     if value > 0:
         result = convert_units(category, value, units)
         if result is not None:
-            st.success(f"The result is: {result:.2f} {units.split(' to ')[-1]}")
-    else:
-        st.error("Please enter a valid positive number.")
+            from_unit, to_unit = (
+            units.split(" to ") if " to " in units else units.split(" into ")
+        )
+            st.success(f"Conversion complete: {value} {from_unit} → {round(result, 2)} {to_unit}.")
+
+
+        else:
+            st.error("Please enter a valid positive number.")
